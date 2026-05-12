@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+
 from pandas import read_csv
 from joblib import dump
 from sklearn.linear_model import LinearRegression
@@ -15,12 +16,12 @@ cleaned_data_path = data_path / CLEANED_DATA_FILE_NAME
 if os.path.exists(cleaned_data_path):
     print(f"File found: {cleaned_data_path}")
 else:
-    print(f"File NOT found at! Run the clean_data script! File expected: {cleaned_data_path} ")
+    raise FileNotFoundError(f"Run the clean_data script! File expected: {cleaned_data_path}")
 
 df = read_csv(cleaned_data_path)
 print(df.head())
 
-X = df["YearsExperience"].values.reshape(10, 1)
+X = df["YearsExperience"].values.reshape(-1, 1)
 y = df["Salary"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
