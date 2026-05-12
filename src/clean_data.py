@@ -1,12 +1,11 @@
 from pathlib import Path
-
 import pandas as pd
+from constants import CLEANED_DATA_FILE_NAME, SOURCE_DATA_FILE_NAME
 
 project_root = Path(__file__).resolve().parent.parent
 data_path = project_root / 'data'
-source_salary_data_path = data_path / 'Salary_Data.csv'
-cleaned_data_file_name = 'cleaned_salary_data.csv'
-output_path = data_path / cleaned_data_file_name
+source_salary_data_path = data_path / SOURCE_DATA_FILE_NAME
+output_path = data_path / CLEANED_DATA_FILE_NAME
 
 df = pd.read_csv(source_salary_data_path)
 
@@ -33,4 +32,4 @@ print(output_path)
 print("Cleaned data: ")
 print(df.head())
 
-print(f"\nCleaned data saved to {cleaned_data_file_name}")
+print(f"\nCleaned data saved to {CLEANED_DATA_FILE_NAME}")
