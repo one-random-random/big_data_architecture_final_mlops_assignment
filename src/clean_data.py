@@ -8,7 +8,7 @@ source_salary_data_path = data_path / 'Salary_Data.csv'
 cleaned_data_file_name = 'cleaned_salary_data.csv'
 output_path = data_path / cleaned_data_file_name
 
-df = pd.read_csv(input_path)
+df = pd.read_csv(source_salary_data_path)
 
 print("Original data")
 print(df.head())
