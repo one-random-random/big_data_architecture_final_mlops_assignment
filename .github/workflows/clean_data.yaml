@@ -5,7 +5,15 @@ jobs:
   clean:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
       - run: |
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
+      - name: clean_data
+        run: |
+          pwd
+          ls -al
+          cd src
+          pip install -r requirements.txt
+          python clean_data.py
