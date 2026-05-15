@@ -1,0 +1,12 @@
+name: Stop Salary App Container
+on: workflow_dispatch
+
+jobs:
+  stop_container:
+    runs-on: self-hosted
+    steps:
+      - name: Stop existing container
+        run: docker stop salary-prediction-container || true
+
+      - name: Remove existing container
+        run: docker rm salary-prediction-container || true
