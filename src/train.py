@@ -6,10 +6,9 @@ import mlflow
 from joblib import dump
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import r2_score, mean_squared_error
 
-from constants import CLEANED_DATA_FILE_NAME, TEST_SIZE, RANDOM_STATE
+from constants import CLEANED_DATA_FILE_NAME, TEST_SIZE, RANDOM_STATE, MODEL_FILE_NAME
 
 project_root = Path(__file__).resolve().parent.parent
 project_src_dir = project_root / 'src'
@@ -50,6 +49,6 @@ with mlflow.start_run():
         name="my-linear-salary-registered-model"
     )
 
-    print(f"Modle r2 score: {r2}")
+    print(f"Model scores - r2: {r2}, mse: {mse}")
 
-dump(model, f"{models_path}/YearsExperienceSalaryModel.pkl")
+dump(model, f"{models_path}/{MODEL_FILE_NAME}")

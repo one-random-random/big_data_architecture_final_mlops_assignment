@@ -1,5 +1,5 @@
 name: CI - Clean and Train data
-on: workflow_dispatch
+on: [workflow_dispatch, push, pull_request]
 
 jobs:
   clean:
@@ -10,15 +10,20 @@ jobs:
       - run: |
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
-      - name: clean_data
+      - name: Clean the Salary data
         run: |
           pwd
           ls -al
           pip install -r requirements.txt
           python src/clean_data.py
-      - name: train_model
+      - name: Train the Salary model
         run: |
           pwd
           ls -al
           pip install -r requirements.txt
           python src/train.py
+      - name: Upload trained model artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: salary-data
+          path: models/YearsExperienceSalaryModel.pkl
