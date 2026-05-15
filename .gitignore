@@ -1,1 +1,5 @@
-src/__pycache__
+src/__pycache__/
+__pycache__/
+mlartifacts/
+mlruns/
+mlflow.db
