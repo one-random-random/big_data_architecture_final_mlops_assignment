@@ -14,11 +14,11 @@ jobs:
         run: |
           pwd
           ls -al
-          pip install -r src/requirements.txt
+          pip install -r requirements.txt
           python src/clean_data.py
       - name: train_model
         run: |
           pwd
           ls -al
-          pip install -r src/requirements.txt
+          pip install -r requirements.txt
           python src/train.py
