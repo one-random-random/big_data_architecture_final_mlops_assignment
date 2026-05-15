@@ -1,0 +1,24 @@
+name: Run Docker Container on Self Hosted - Salary App
+on: workflow_dispatch
+
+jobs:
+  deploy_image:
+    runs-on: self-hosted
+    steps:
+      - name: Login to Docker
+        uses: docker/login-action@v4
+        with:
+          username: ${{secrets.DOCKER_HUB_USERNAME}}
+          password: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
+
+      - name: Docker pull image from Docker Hub
+        run: docker pull kdocker99/salary-prediction-app:latest
+
+      - name: Stop existing container
+        run: docker stop salary-prediction-container || true
+
+      - name: Remove existing container
+        run: docker rm salary-prediction-container || true
+
+      - name: Docker run image
+        run: docker run -d --name salary-prediction-container -p 5000:5000 kdocker99/salary-prediction-app:latest
