@@ -25,5 +25,5 @@ jobs:
       - name: Upload trained model artifact
         uses: actions/upload-artifact@v6
         with:
-          name: salary-data
+          name: salary-model
           path: models/YearsExperienceSalaryModel.pkl

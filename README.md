@@ -50,3 +50,40 @@ http://127.0.0.1:5555
 ```
 
 Should now see the run you just did appear, it will have the `r2_score` and `mse`. The artifact should be present there.
+
+## Local Docker Testing on Windows
+
+Use these steps to build and run the Flask app in Docker locally.
+
+### Prerequisites
+
+- Docker Desktop is installed and running.
+- Run commands from the repository root.
+
+### 1. Build the Docker image
+
+```powershell
+docker build -t salary-prediction-app .
+```
+
+### 2. Run the container
+
+```powershell
+docker run --name salary-prediction-container -p 5000:5000 salary-prediction-app
+```
+
+### 3. Test the Flask app
+
+Open these URLs in a browser:
+
+```text
+http://127.0.0.1:5000/
+http://127.0.0.1:5000/predict?experience=2
+```
+
+### 4. Stop and remove the container
+
+```powershell
+docker stop salary-prediction-container
+docker rm salary-prediction-container
+```
