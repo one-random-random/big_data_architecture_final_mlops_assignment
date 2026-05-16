@@ -1,9 +1,15 @@
 name: Run Docker Container on Self Hosted - Salary App
-on: workflow_dispatch
+on: 
+  workflow_run:
+    workflows:
+      - Publish Docker Image - Salary App
+    types:
+      - completed
 
 jobs:
   deploy_image:
     runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Login to Docker
         uses: docker/login-action@v4
@@ -22,3 +28,9 @@ jobs:
 
       - name: Docker run image
         run: docker run -d --name salary-prediction-container -p 5000:5000 kdocker99/salary-prediction-app:latest
+      
+      - name: Smoke test app
+        run: |
+          sleep 10
+          curl -f http://localhost:5000/
+          curl -f "http://localhost:5000/predict?experience=2"

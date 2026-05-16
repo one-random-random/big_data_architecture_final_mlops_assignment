@@ -3,3 +3,4 @@ __pycache__/
 mlartifacts/
 mlruns/
 mlflow.db
+reports/metrics/candidate_metrics.json
