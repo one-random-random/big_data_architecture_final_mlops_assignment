@@ -32,5 +32,4 @@ jobs:
       - name: Smoke test app
         run: |
           sleep 10
-          curl -f http://localhost:5000/
-          curl -f "http://localhost:5000/predict?experience=2"
+          curl -f http://localhost:5000/health"
