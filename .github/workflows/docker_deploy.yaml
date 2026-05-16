@@ -32,4 +32,4 @@ jobs:
       - name: Smoke test app
         run: |
           sleep 10
-          curl -f http://localhost:5000/health"
+          curl -f http://localhost:5000/health
