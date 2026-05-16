@@ -33,3 +33,4 @@ jobs:
         run: |
           sleep 10
           curl -f http://localhost:5000/health
+          curl -f "http://localhost:5000/predict?experience=2"

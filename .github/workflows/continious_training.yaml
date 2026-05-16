@@ -44,3 +44,9 @@ jobs:
         with:
           name: candidate-metrics
           path: reports/metrics/candidate_metrics.json
+      
+      - name: Upload MLflow runs artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: mlflow-runs
+          path: mlruns/
