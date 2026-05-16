@@ -4,3 +4,5 @@ mlartifacts/
 mlruns/
 mlflow.db
 reports/metrics/candidate_metrics.json
+data/cleaned_salary_data.csv
+models/YearsExperienceSalaryModel.pkl
