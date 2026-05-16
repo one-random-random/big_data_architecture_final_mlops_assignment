@@ -53,35 +53,44 @@ Should now see the run you just did appear, it will have the `r2_score` and `mse
 
 ## Local Docker Testing on Windows
 
-Use these steps to build and run the Flask app in Docker locally.
+Use these steps to build and run the Flask app with Gunicorn in Docker locally.
 
 ### Prerequisites
 
 - Docker Desktop is installed and running.
 - Run commands from the repository root.
 
-### 1. Build the Docker image
+### 1. Create the trained model locally
+
+```powershell
+python -m pip install -r requirements.txt
+python src\clean_data.py
+python src\train.py
+```
+
+### 2. Build the Docker image
 
 ```powershell
 docker build -t salary-prediction-app .
 ```
 
-### 2. Run the container
+### 3. Run the container
 
 ```powershell
 docker run --name salary-prediction-container -p 5000:5000 salary-prediction-app
 ```
 
-### 3. Test the Flask app
+### 4. Test the Flask app
 
 Open these URLs in a browser:
 
 ```text
 http://127.0.0.1:5000/
+http://127.0.0.1:5000/health
 http://127.0.0.1:5000/predict?experience=2
 ```
 
-### 4. Stop and remove the container
+### 5. Stop and remove the container
 
 ```powershell
 docker stop salary-prediction-container
