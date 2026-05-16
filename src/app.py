@@ -15,6 +15,10 @@ model = load(model_path)
 def welcome():
     return "Hello and welcome to my Salary Prediction app."
 
+@app.route('/health')
+def health_check():
+    return {"status": "healthy"}, 200
+
 @app.route('/predict')
 def predict_salary():
     experience = request.args.get('experience')
