@@ -46,11 +46,6 @@ with mlflow.start_run():
 
     result = mlflow.sklearn.log_model(sk_model=model, artifact_path="model")
 
-    mlflow.register_model(
-        model_uri=result.model_uri,
-        name="my-linear-salary-registered-model"
-    )
-
     print(f"Model scores - r2: {r2}, mse: {mse}")
 
 metrics_path.parent.mkdir(parents=True, exist_ok=True)
