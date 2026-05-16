@@ -1,0 +1,46 @@
+name: Continious Training - Clean, Train, Verify and Upload
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - data/**
+      - src/clean_data.py
+      - src/train.py
+      - src/check_metrics.py
+      - src/constants.py
+      - requirements.txt
+      - models/production_metrics.json
+
+jobs:
+  train_and_check_metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Clean data
+        run: python src/clean_data.py
+
+      - name: Train model and write candidate metrics
+        run: python src/train.py
+
+      - name: Check model metrics
+        run: python src/check_metrics.py
+
+      - name: Upload trained model artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: salary-model
+          path: models/YearsExperienceSalaryModel.pkl
+
+      - name: Upload candidate metrics artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: candidate-metrics
+          path: reports/metrics/candidate_metrics.json

@@ -1,4 +1,5 @@
 import os
+import json
 from pathlib import Path
 
 from pandas import read_csv
@@ -15,6 +16,7 @@ project_src_dir = project_root / 'src'
 data_path = project_root / 'data'
 cleaned_data_path = data_path / CLEANED_DATA_FILE_NAME
 models_path = project_root / 'models'
+metrics_path = project_root / 'reports' / 'metrics' / 'candidate_metrics.json'
 
 if os.path.exists(cleaned_data_path):
     print(f"File found: {cleaned_data_path}")
@@ -50,5 +52,21 @@ with mlflow.start_run():
     )
 
     print(f"Model scores - r2: {r2}, mse: {mse}")
+
+metrics_path.parent.mkdir(parents=True, exist_ok=True)
+with open(metrics_path, "w") as metrics_file:
+    json.dump(
+        {
+            "r2_score": r2,
+            "mse": mse,
+            "model_file": MODEL_FILE_NAME,
+            "test_size": TEST_SIZE,
+            "random_state": RANDOM_STATE
+        },
+        metrics_file,
+        indent=2
+    )
+
+print(f"Candidate metrics saved to: {metrics_path}")
 
 dump(model, f"{models_path}/{MODEL_FILE_NAME}")
